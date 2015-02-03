@@ -1,0 +1,35 @@
+body { 
+  padding-top: 70px; 
+}
+
+.headerRoom {
+  margin-top: 15px;
+}
+.unlit {
+  color: silver;
+}
+.formPopup {
+  display: none; 
+  background: #777777;
+  background: rgba(20,20,20,.6);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.formOverlay {
+  display: none; 
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  border: 2px solid silver;
+  border-radius: 12px;
+  top: 140px;
+  position: relative;
+  background-color: white;
+}
+.btn-success {
+  float: right;
+}
