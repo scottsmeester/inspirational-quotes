@@ -5,8 +5,14 @@ body {
 .headerRoom {
   margin-top: 15px;
 }
+.glyphicon {
+  color: #cc1212;
+}
 .unlit {
   color: silver;
+}
+.starLit {
+  color: #FFE51E;
 }
 .formPopup {
   display: none; 
@@ -32,4 +38,8 @@ body {
 }
 .btn-success {
   float: right;
+}
+.newQuoteHighlight {
+  background-color: #FFE51E;
+  /*border-color: #eea236;*/
 }

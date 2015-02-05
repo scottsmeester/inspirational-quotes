@@ -14,6 +14,10 @@ Quote.prototype.printQuote = function(){
     return this.$el;
 };
 
+Quote.prototype.animateBackground = function(){
+  this.$el.animate({backgroundColor:'#fff'}, 2000);
+};
+
 var createStars = function(starsInt){
 
   var myStars = "";
@@ -81,6 +85,10 @@ var myQuotes = [
   }
 ];
 
+// Quote.prototype.updateStars = function(){
+
+// }
+
 
 for (var i = 0; i < myQuotes.length; i++) {
   var thisQuote = new Quote(myQuotes[i].author, myQuotes[i].quote, myQuotes[i].stars);
@@ -107,30 +115,51 @@ $('.btn-primary').click(function(){
 
   var newQuote = $('textarea[name="quote"]').val();
   var newAuthor = $('input[name="author"]').val();
-  // var newStars = $( '#stars option:selected' ).val();
   
-  console.log('quote:', newQuote);
-  
-  
-  if (newQuote.author === "") {
-    $('.form-group').addClass('has-error');
+  if (newQuote === "" && newAuthor === "") {
+    $('#quoteEntry').addClass('has-error');
+    $('#authorEntry').addClass('has-error');
+    return false;
+  }
+  else if (newQuote === "") {
+    $('#quoteEntry').addClass('has-error');
+    $('#authorEntry').removeClass('has-error');
     return false;
   }
   else if (newAuthor === "") {
-    $('.form-group').addClass('has-error');
+    $('#quoteEntry').removeClass('has-error');
+    $('#authorEntry').addClass('has-error');
     return false;
   }
-  else {
-    $('.formOverlay').fadeOut(annimationTime);
-    $('.formPopup').fadeOut(annimationTime);
-    $('#addItemBtn').fadeIn(annimationTime);
 
-    var thisNewQuote = new Quote(newAuthor, newQuote, 1);
+  $('#quoteEntry').removeClass('has-error');
+  $('#authorEntry').removeClass('has-error');
 
-    $('blockquote').first().before(thisNewQuote.printQuote());
-  }
+  $('.formOverlay').fadeOut(annimationTime);
+  $('.formPopup').fadeOut(annimationTime);
+  $('#addItemBtn').fadeIn(annimationTime);
 
+  var thisNewQuote = new Quote(newAuthor, newQuote, 1);
 
+  $('blockquote').first().before(thisNewQuote.printQuote().addClass('newQuoteHighlight'));
+    thisNewQuote.animateBackground();
 });
+
+$(document)
+  .on('mouseenter', '.glyphicon', function(){
+    // $(this).addClass('starLit');
+    $(this).parent().find('.glyphicon:lt(' + ($(this).index() - 1) + ')').addClass('starLit');
+    // console.log($(this).index());
+  })
+  .on('mouseleave', '.glyphicon', function(){
+    $(this).parent().children().removeClass('starLit');
+
+  })
+  .on('click', '.glyphicon', function(){
+    // $(this).parent().find('.glyphicon:lt(' + ($(this).index() - 1) + ')').
+    // addClass('starLit');
+    // createStars($(this).index() - 1);
+    console.log(createStars($(this).index() - 1));
+  });
 
 
