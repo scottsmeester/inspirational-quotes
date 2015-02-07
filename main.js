@@ -13,7 +13,7 @@ Quote.prototype.printQuote = function(){
 
     return this.$el;
 };
-
+// todo: css on here?
 Quote.prototype.animateBackground = function(){
   this.$el.animate({backgroundColor:'#fff'}, 2000);
 };
@@ -94,20 +94,20 @@ for (var i = 0; i < myQuotes.length; i++) {
   var thisQuote = new Quote(myQuotes[i].author, myQuotes[i].quote, myQuotes[i].stars);
   $('.container.quotes').append(thisQuote.printQuote());
 }
-var annimationTime = 100;
+var annimationTime = 200;
 
 $('#addItemBtn').click(function(){
   $('textarea[name="quote"]').val("");
   $('input[name="author"]').val("");
   $( '#stars option:selected' ).val();
-  $('.formOverlay').fadeIn(annimationTime);
-  $('.formPopup').fadeIn(annimationTime);
+  // $('.formOverlay').fadeIn(annimationTime);
+  // $('.formPopup').fadeIn(annimationTime);
   $('#addItemBtn').fadeOut(annimationTime);
 });
 
-$('.cancelButton').click(function(){
-  $('.formOverlay').fadeOut(annimationTime);
-  $('.formPopup').fadeOut(annimationTime);
+$('.btn-default').click(function(){
+  // $('.formOverlay').fadeOut(annimationTime);
+  // $('.formPopup').fadeOut(annimationTime);
   $('#addItemBtn').fadeIn(annimationTime);
 });
 
@@ -135,11 +135,11 @@ $('.btn-primary').click(function(){
   $('#quoteEntry').removeClass('has-error');
   $('#authorEntry').removeClass('has-error');
 
-  $('.formOverlay').fadeOut(annimationTime);
-  $('.formPopup').fadeOut(annimationTime);
-  $('#addItemBtn').fadeIn(annimationTime);
+  $('#myModal').toggle();
+  // $('.modal-dialog').fadeOut(annimationTime);
+  $('#addItemBtn').toggle();
 
-  var thisNewQuote = new Quote(newAuthor, newQuote, 1);
+  var thisNewQuote = new Quote(newAuthor, newQuote, 0);
 
   $('blockquote').first().before(thisNewQuote.printQuote().addClass('newQuoteHighlight'));
     thisNewQuote.animateBackground();
@@ -156,10 +156,10 @@ $(document)
 
   })
   .on('click', '.glyphicon', function(){
-    // $(this).parent().find('.glyphicon:lt(' + ($(this).index() - 1) + ')').
-    // addClass('starLit');
-    // createStars($(this).index() - 1);
-    console.log(createStars($(this).index() - 1));
+    var parent = $(this).parent();
+    var thisIndex = $(this).index() - 1;
+    parent.children('.glyphicon').remove();
+    parent.append(createStars(thisIndex));
   });
 
 
